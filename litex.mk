@@ -1,6 +1,9 @@
 ifdef CONFIG_CPU_MINERVA
 LITEX_CPU_DIR  := $(top)/3rdparty/litex/litex/soc/cores/cpu/minerva
 CPPFLAGS_litex := -D__minerva__
+else ifdef CONFIG_CPU_VEXRISCV
+LITEX_CPU_DIR  := $(top)/3rdparty/litex/litex/soc/cores/cpu/vexriscv
+CPPFLAGS_litex := -D__vexriscv__
 else
 $(error Unsupported CPU)
 endif

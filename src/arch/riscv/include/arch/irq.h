@@ -20,7 +20,7 @@ static inline void irq_setie(uint32_t ie)
 }
 
 // TODO #include CPU-specific headers instead
-#ifdef CONFIG_CPU_MINERVA
+#if CONFIG_CPU_MINERVA
 static inline uint32_t irq_getmask(void)
 {
 	return read_csr(0x330);
@@ -34,6 +34,21 @@ static inline void irq_setmask(uint32_t value)
 static inline uint32_t irq_pending(void)
 {
 	return read_csr(0x360);
+}
+#elif CONFIG_CPU_VEXRISCV
+static inline uint32_t irq_getmask(void)
+{
+    return read_csr(0xBC0);
+}
+
+static inline void irq_setmask(uint32_t value)
+{
+    write_csr(0xBC0, value);
+}
+
+static inline uint32_t irq_pending(void)
+{
+    return read_csr(0xFC0);
 }
 #else
 #error Unknown CPU

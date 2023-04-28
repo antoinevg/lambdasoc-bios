@@ -10,17 +10,21 @@ config CPU_MINERVA
 	bool "Minerva"
 	select CPU_ARCH_RISCV
 
+config CPU_VEXRISCV
+	bool "Vexriscv"
+	select CPU_ARCH_RISCV
+
 endchoice
 
 config CPU_BYTEORDER_LITTLE
 	bool
-	default "y" if CPU_MINERVA
+	default "y" 
 
 config CPU_RESET_ADDR
 	hex "Reset vector address"
 
 config CPU_DATA_WIDTH
 	int
-	default 32 if CPU_MINERVA
+	default 32
 
 endmenu
